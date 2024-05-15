@@ -12,7 +12,7 @@ void init_values(t_philo *philo, char **argv)
         philo->times_to_eat = -1;
 }
 
-void init_philos(t_philo *philo, pthread_mutex_t *forks, char **argv)
+void init(t_philo *philo, t_prog *program, pthread_mutex_t *forks, char **argv)
 {
     int i;
 
@@ -22,7 +22,28 @@ void init_philos(t_philo *philo, pthread_mutex_t *forks, char **argv)
         philo[i].id = i + 1;
         philo[i].eating = 0;
         philo[i].meals_eaten = 0;
+        philo[i].start_time = get_current_time();
+        philo[i].last_meal = get_current_time();
+        philo[i].dead_lock = &program->dead_lock;
+        philo[i].meal_lock = &program->meal_lock;
+        philo[i].write_lock = &program->write_lock;
+        philo[i].is_dead = &program->dead;
+        program->dead = 0;
+        program->philos = philo;
+        pthread_mutex_init(&program->write_lock, NULL);
+        pthread_mutex_init(&program->dead_lock, NULL);
+        pthread_mutex_init(&program->meal_lock, NULL);
         init_values(&philo[i], argv);
+        if (i == 0)
+            philo[i].r_fork = &forks[philo[i].philo_num - 1];
+        else
+            philo[i].r_fork = &forks[i - 1];
+        i++;
+    }
+    i = 0;
+    while (i < ft_atoi(argv[1]))
+    {
+        pthread_mutex_init(&forks[i], NULL);
         i++;
     }
 }

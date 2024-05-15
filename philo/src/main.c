@@ -29,6 +29,7 @@ void display_info(t_philo *philo, char **argv)
 int main(int argc, char **argv)
 {
     t_philo philos[PHILO_MAX];
+    t_prog program;
     pthread_mutex_t forks[PHILO_MAX];
 
     if (!validation(argc, argv))
@@ -36,7 +37,7 @@ int main(int argc, char **argv)
         printf("Error\n");
         return (1);
     }
-    init_philos(philos, forks, argv);
+    init(philos, &program, forks, argv);
     display_info(philos, argv);
     return (0);
 }
