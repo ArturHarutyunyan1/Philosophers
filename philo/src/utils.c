@@ -53,6 +53,34 @@ void action(char *msg, t_philo *philo, int id)
 
 	pthread_mutex_lock(philo->write_lock);
 	time = get_current_time() - philo->start_time;
-	printf("%zu %d %s\n", time, id, msg);
+	if (!dead(philo))
+		printf("%zu %d %s\n", time, id, msg);
 	pthread_mutex_unlock(philo->write_lock);
+}
+
+void destroy(char *msg, t_prog *program, pthread_mutex_t *forks)
+{
+	int i;
+
+	i = 0;
+	if (msg)
+		printf("%s\n", msg);
+	pthread_mutex_destroy(&program->dead_lock);
+	pthread_mutex_destroy(&program->meal_lock);
+	pthread_mutex_destroy(&program->write_lock);
+	while (i < program[0].philos->philo_num)
+	{
+		pthread_mutex_destroy(&forks[i]);
+		i++;
+	}
+}
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(500);
+	return (0);
 }

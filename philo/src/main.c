@@ -37,7 +37,10 @@ int main(int argc, char **argv)
         printf("Error\n");
         return (1);
     }
+    init_program(&program, philos);
+    init_forks(forks, ft_atoi(argv[1]));
     init(philos, &program, forks, argv);
-    display_info(philos, argv);
+    thread_create(&program, forks);
+    destroy(NULL, &program, forks); 
     return (0);
 }

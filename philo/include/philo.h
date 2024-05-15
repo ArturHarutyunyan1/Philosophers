@@ -52,4 +52,12 @@ void action(char *msg, t_philo *philo, int id);
 void think(t_philo *philo);
 void philo_sleep(t_philo *philo);
 void eat(t_philo *philo);
+void destroy(char *msg, t_prog *program, pthread_mutex_t *forks);
+void *monitoring(void *ptr);
+int	thread_create(t_prog *program, pthread_mutex_t *forks);
+int	philosopher_dead(t_philo *philo, size_t time_to_die);
+int	ft_usleep(size_t milliseconds);
+void init_forks(pthread_mutex_t *forks, int num);
+int dead(t_philo *philo);
+void init_program(t_prog *program, t_philo *philo);
 #endif

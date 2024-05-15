@@ -28,22 +28,33 @@ void init(t_philo *philo, t_prog *program, pthread_mutex_t *forks, char **argv)
         philo[i].meal_lock = &program->meal_lock;
         philo[i].write_lock = &program->write_lock;
         philo[i].is_dead = &program->dead;
-        program->dead = 0;
-        program->philos = philo;
-        pthread_mutex_init(&program->write_lock, NULL);
-        pthread_mutex_init(&program->dead_lock, NULL);
-        pthread_mutex_init(&program->meal_lock, NULL);
         init_values(&philo[i], argv);
+        philo[i].l_fork = &forks[i];
         if (i == 0)
-            philo[i].r_fork = &forks[philo[i].philo_num - 1];
+            philo[i].r_fork = &forks[ft_atoi(argv[1]) - 1];
         else
             philo[i].r_fork = &forks[i - 1];
         i++;
     }
+}
+
+void init_forks(pthread_mutex_t *forks, int num)
+{
+    int i;
+
     i = 0;
-    while (i < ft_atoi(argv[1]))
+    while (i < num)
     {
         pthread_mutex_init(&forks[i], NULL);
         i++;
     }
+}
+
+void init_program(t_prog *program, t_philo *philo)
+{
+            program->dead = 0;
+        program->philos = philo;
+        pthread_mutex_init(&program->write_lock, NULL);
+        pthread_mutex_init(&program->dead_lock, NULL);
+        pthread_mutex_init(&program->meal_lock, NULL);   
 }
