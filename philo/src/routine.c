@@ -1,12 +1,13 @@
 #include "../include/philo.h"
 
-int dead(t_philo *philo)
+int philo_loop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
 	if (*philo->is_dead == 1)
 		return (pthread_mutex_unlock(philo->dead_lock), 1);
 	pthread_mutex_unlock(philo->dead_lock);
 	return (0);
+
 }
 
 void *routine(void *ptr)
@@ -16,16 +17,16 @@ void *routine(void *ptr)
 	philo = (t_philo *)ptr;
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
-	while (!dead(philo))
+	while (!philo_loop(philo))
 	{
 		eat(philo);
-		philo_sleep(philo);
+		dream(philo);
 		think(philo);
 	}
 	return (ptr);
 }
 
-int	thread_create(t_prog *program, pthread_mutex_t *forks)
+int simulation(t_prog *program, pthread_mutex_t *forks)
 {
 	pthread_t	observer;
 	int			i;

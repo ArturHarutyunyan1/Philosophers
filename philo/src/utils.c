@@ -47,15 +47,14 @@ size_t	get_current_time(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-void action(char *msg, t_philo *philo, int id)
+int	ft_usleep(size_t milliseconds)
 {
-	size_t time;
+	size_t	start;
 
-	pthread_mutex_lock(philo->write_lock);
-	time = get_current_time() - philo->start_time;
-	if (!dead(philo))
-		printf("%zu %d %s\n", time, id, msg);
-	pthread_mutex_unlock(philo->write_lock);
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(500);
+	return (0);
 }
 
 void destroy(char *msg, t_prog *program, pthread_mutex_t *forks)
@@ -73,14 +72,4 @@ void destroy(char *msg, t_prog *program, pthread_mutex_t *forks)
 		pthread_mutex_destroy(&forks[i]);
 		i++;
 	}
-}
-
-int	ft_usleep(size_t milliseconds)
-{
-	size_t	start;
-
-	start = get_current_time();
-	while ((get_current_time() - start) < milliseconds)
-		usleep(500);
-	return (0);
 }

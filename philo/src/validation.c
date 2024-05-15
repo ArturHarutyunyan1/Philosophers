@@ -1,6 +1,5 @@
 #include "../include/philo.h"
 
-
 bool validation(int argc, char **argv)
 {
     if ((argc != 5 && argc != 6) || !check_num(argv))
@@ -12,7 +11,6 @@ bool check_num(char **argv)
 {
     int i;
     int j;
-
     i = 1;
     while (argv[i])
     {

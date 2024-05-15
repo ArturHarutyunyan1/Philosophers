@@ -9,8 +9,7 @@
 #include <limits.h>
 #include <sys/time.h>
 
-
-#define PHILO_MAX 300
+#define LIMIT 200
 
 typedef struct s_philo
 {
@@ -42,22 +41,24 @@ typedef struct s_prog
     t_philo *philos;
 }t_prog;
 
+
 bool validation(int argc, char **argv);
-int ft_strlen(char *str);
 bool check_num(char **argv);
+int ft_strlen(char *str);
 long long	ft_atoi(const char *str);
-void init(t_philo *philo, t_prog *program, pthread_mutex_t *forks, char **argv);
-size_t	get_current_time(void);
-void action(char *msg, t_philo *philo, int id);
-void think(t_philo *philo);
-void philo_sleep(t_philo *philo);
-void eat(t_philo *philo);
-void destroy(char *msg, t_prog *program, pthread_mutex_t *forks);
-void *monitoring(void *ptr);
-int	thread_create(t_prog *program, pthread_mutex_t *forks);
-int	philosopher_dead(t_philo *philo, size_t time_to_die);
-int	ft_usleep(size_t milliseconds);
-void init_forks(pthread_mutex_t *forks, int num);
-int dead(t_philo *philo);
+void init_philos(t_philo *philo, t_prog *program, pthread_mutex_t *forks, char **argv);
 void init_program(t_prog *program, t_philo *philo);
+void init_values(t_philo *philo, char **argv);
+void init_forks(pthread_mutex_t *forks, int num);
+size_t	get_current_time(void);
+void action(char *msg, t_philo *philo);
+int philo_loop(t_philo *philo);
+int	ft_usleep(size_t milliseconds);
+void think(t_philo *philo);
+void dream(t_philo *philo);
+void eat(t_philo *philo);
+void *monitoring(void *ptr);
+void destroy(char *msg, t_prog *program, pthread_mutex_t *forks);
+int simulation(t_prog *program, pthread_mutex_t *forks);
+
 #endif

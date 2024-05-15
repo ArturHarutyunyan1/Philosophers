@@ -12,7 +12,7 @@ void init_values(t_philo *philo, char **argv)
         philo->times_to_eat = -1;
 }
 
-void init(t_philo *philo, t_prog *program, pthread_mutex_t *forks, char **argv)
+void init_philos(t_philo *philo, t_prog *program, pthread_mutex_t *forks, char **argv)
 {
     int i;
 
