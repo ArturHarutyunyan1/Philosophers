@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 23:12:46 by arturhar          #+#    #+#             */
+/*   Updated: 2024/05/15 23:12:47 by arturhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
-int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 long long	ft_atoi(const char *str)
@@ -34,7 +46,7 @@ long long	ft_atoi(const char *str)
 		i++;
 	}
 	if (num * neg > INT_MAX || num * neg < INT_MIN)
-        return (0);
+		return (0);
 	return (num * neg);
 }
 
@@ -57,9 +69,9 @@ int	ft_usleep(size_t milliseconds)
 	return (0);
 }
 
-void destroy(char *msg, t_prog *program, pthread_mutex_t *forks)
+void	destroy(char *msg, t_prog *program, pthread_mutex_t *forks)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (msg)

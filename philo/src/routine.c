@@ -1,16 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 23:12:44 by arturhar          #+#    #+#             */
+/*   Updated: 2024/05/15 23:12:45 by arturhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
-int philo_loop(t_philo *philo)
+int	philo_loop(t_philo *philo)
 {
 	pthread_mutex_lock(philo->dead_lock);
 	if (*philo->is_dead == 1)
 		return (pthread_mutex_unlock(philo->dead_lock), 1);
 	pthread_mutex_unlock(philo->dead_lock);
 	return (0);
-
 }
 
-void *routine(void *ptr)
+void	*routine(void *ptr)
 {
 	t_philo	*philo;
 
@@ -26,7 +37,7 @@ void *routine(void *ptr)
 	return (ptr);
 }
 
-int simulation(t_prog *program, pthread_mutex_t *forks)
+int	simulation(t_prog *program, pthread_mutex_t *forks)
 {
 	pthread_t	observer;
 	int			i;

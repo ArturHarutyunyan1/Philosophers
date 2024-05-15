@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   monitoring.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/15 23:12:38 by arturhar          #+#    #+#             */
+/*   Updated: 2024/05/15 23:12:39 by arturhar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philo.h"
 
-int philo_dead(t_philo *philo, size_t time)
+int	philo_dead(t_philo *philo, size_t time)
 {
 	pthread_mutex_lock(philo->meal_lock);
 	if (get_current_time() - philo->last_meal >= time
@@ -10,7 +22,7 @@ int philo_dead(t_philo *philo, size_t time)
 	return (0);
 }
 
-int dead_check(t_philo *philo)
+int	dead_check(t_philo *philo)
 {
 	int	i;
 
@@ -30,7 +42,7 @@ int dead_check(t_philo *philo)
 	return (0);
 }
 
-int meals_finished(t_philo *philo)
+int	meals_finished(t_philo *philo)
 {
 	int	i;
 	int	finished_eating;
@@ -57,7 +69,7 @@ int meals_finished(t_philo *philo)
 	return (0);
 }
 
-void *monitoring(void *ptr)
+void	*monitoring(void *ptr)
 {
 	t_philo	*philos;
 
