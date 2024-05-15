@@ -6,7 +6,7 @@
 /*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:12:48 by arturhar          #+#    #+#             */
-/*   Updated: 2024/05/15 23:12:49 by arturhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 23:26:06 by arturhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	validation(int argc, char **argv)
 {
-	if ((argc != 5 && argc != 6) || !check_num(argv))
+	if ((argc != 5 && argc != 6) || !check_num(argv) || ft_atoi(argv[1]) > 200)
 		return (false);
 	return (true);
 }

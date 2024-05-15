@@ -21,7 +21,7 @@
 # include <limits.h>
 # include <sys/time.h>
 
-# define LIMIT 200
+# define LIMIT 300
 
 typedef struct s_philo
 {
