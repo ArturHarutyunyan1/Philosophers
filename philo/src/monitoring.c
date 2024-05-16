@@ -6,7 +6,7 @@
 /*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:12:38 by arturhar          #+#    #+#             */
-/*   Updated: 2024/05/15 23:12:39 by arturhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 10:10:01 by arturhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	dead_check(t_philo *philo)
 	{
 		if (philo_dead(&philo[i], philo[i].time_to_die))
 		{
-			action("died", &philo[i]);
+			action("has died", &philo[i]);
 			pthread_mutex_lock(philo[0].dead_lock);
 			*philo->is_dead = 1;
 			pthread_mutex_unlock(philo[0].dead_lock);
