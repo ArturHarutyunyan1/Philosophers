@@ -6,7 +6,7 @@
 /*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:12:38 by arturhar          #+#    #+#             */
-/*   Updated: 2024/05/20 00:07:48 by arturhar         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:32:14 by arturhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	meals_finished(t_philo *philo)
 	}
 	if (finished_eating == philo[0].philo_num)
 	{
-		ft_usleep(philo[0].time_to_eat);
 		pthread_mutex_lock(philo[0].dead_lock);
 		*philo->is_dead = 1;
 		pthread_mutex_unlock(philo[0].dead_lock);

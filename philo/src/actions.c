@@ -6,7 +6,7 @@
 /*   By: arturhar <arturhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:12:31 by arturhar          #+#    #+#             */
-/*   Updated: 2024/05/19 23:55:58 by arturhar         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:37:12 by arturhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,20 @@ void	dream(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->r_fork);
-	action("has taken a fork", philo);
+	pthread_mutex_lock(philo->l_fork);
+	action("Has taken a fork", philo);
 	if (philo->philo_num == 1)
 	{
 		ft_usleep(philo->time_to_die);
 		pthread_mutex_unlock(philo->r_fork);
 		return ;
 	}
-	pthread_mutex_lock(philo->l_fork);
-	action("has taken a fork", philo);
-	philo->eating = 1;
-	action("is eating", philo);
-	pthread_mutex_lock(philo->meal_lock);
+	pthread_mutex_lock(philo->r_fork);
+	action("Has taken a fork", philo);
 	philo->last_meal = get_current_time();
-	philo->meals_eaten++;
-	pthread_mutex_unlock(philo->meal_lock);
+	action("Is eating", philo);
 	ft_usleep(philo->time_to_eat);
-	philo->eating = 0;
-	pthread_mutex_unlock(philo->l_fork);
+	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }
